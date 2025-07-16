@@ -91,3 +91,136 @@ bank=AXIS&paymentInstrument=CREDIT to reduce DB load.
 
 - Dockerize the entire setup and configure CI/CD for smoother deployment
 
+# 📘 API Documentation – PiePay Backend
+
+This document outlines the available API endpoints, request formats, parameters, and expected responses for the PiePay backend assignment.
+
+---
+
+## 🔗 Base URL
+
+``` http://localhost:3000/api ```
+
+
+All routes below are prefixed with `/api`.
+
+---
+
+## 📩 POST /offer
+
+### ➕ Purpose:
+Receives Flipkart offer API response and stores parsed offers in the database.
+
+### 🔧 Request Format
+
+**Endpoint:**
+
+- POST /api/offer
+  
+**Headers:**
+
+Content-Type: application/json
+
+**Body (Example):**
+```json
+{
+  "flipkartOfferApiResponse": {
+    "data": {
+      "sections": [
+        {
+          "offers": [
+            {
+              "id": "OFFER123",
+              "title": "10% off on AXIS Bank Credit Cards",
+              "bankName": "AXIS",
+              "discountAmount": 500,
+              "paymentInstruments": ["CREDIT"]
+            },
+            {
+              "id": "OFFER124",
+              "title": "Flat ₹750 off on IDFC EMI",
+              "bankName": "IDFC",
+              "discountAmount": 750,
+              "paymentInstruments": ["EMI_OPTIONS"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+**✅ Response (Example)**
+```
+{
+  "noOfOffersIdentified": 2,
+  "noOfNewOffersCreated": 2
+}
+```
+**📝 Notes**
+- Duplicate offers (based on offerId) are not reinserted.
+
+- Stores bank, title, discountAmount, paymentInstruments.
+
+## 📈 GET /highest-discount
+**🔍 Purpose:**
+Find the best offer (highest discount) for a given bank and optional payment instrument.
+
+**📎 Endpoint:**
+```
+GET /api/highest-discount
+```
+**🔐 Query Parameters:**
+| Parameter           | Type   | Required | Description                                                    |
+| ------------------- | ------ | -------- | -------------------------------------------------------------- |
+| `amountToPay`       | number | ✅        | Final amount user needs to pay                                 |
+| `bankName`          | string | ✅        | Bank name (e.g., AXIS, HDFC)                                   |
+| `paymentInstrument` | string | ❌        | (Optional) Filter by payment mode (e.g., CREDIT, EMI\_OPTIONS) |
+
+**📤Example Request:**
+```
+GET /api/highest-discount?amountToPay=10000&bankName=HDFC&paymentInstrument=CREDIT
+```
+**✅ Example Response: json Copy code**
+```
+{
+  "highestDiscountAmount": 600
+}
+```
+
+**📝 Notes:**
+- If no matching offers are found, highestDiscountAmount is 0.
+
+- Filters by both bankName and optionally paymentInstrument.
+
+## 📃 GET /offers (Optional Utility API)
+**🔍 Purpose:**
+Fetch all offers stored in the database (for testing/debug/admin purposes).
+
+**Endpoint:**
+
+```bash
+GET /api/offers
+```
+**Example Response:**
+
+```
+{
+  "offers": [
+    {
+      "_id": "66a8a86d2...",
+      "offerId": "OFFER123",
+      "title": "10% off on AXIS Credit Cards",
+      "bank": "AXIS",
+      "discountAmount": 500,
+      "paymentInstruments": ["CREDIT"],
+      "createdAt": "2024-07-16T12:00:00.000Z"
+    },
+    ...
+  ]
+}
+```
+
+## ❤️ Final Note
+I truly enjoyed building this assignment and exploring PiePay's problem space. The idea of unlocking better payment experiences through backend intelligence excites me, and I'd love to contribute to building a robust, scalable, and user-centric infrastructure at PiePay.
