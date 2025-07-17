@@ -6,7 +6,7 @@ This project is a backend service that detects and stores Flipkart payment offer
 
 <img width="500" height="400" alt="Screenshot 2025-07-16 214958" src="https://github.com/user-attachments/assets/e83c6ddc-3a60-4572-97eb-4868e72eaac0" />
 
-<img width="500" height="400" alt="Screenshot 2025-07-16 215021" src="https://github.com/user-attachments/assets/4528987b-10d7-4a5b-b4ea-60cd93b8dc15" />
+<img width="500" height="400" alt="Screenshot 2025-07-16 214916" src="https://github.com/user-attachments/assets/611bc12c-5eb0-4583-8798-0e34c8161895" />
 
 ---
 
