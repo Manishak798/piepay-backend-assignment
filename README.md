@@ -20,7 +20,7 @@ This project is a backend service that detects and stores Flipkart payment offer
 ### Installation Steps
 
 ```bash
-git clone https://github.com/your-username/piepay-backend.git
+git clone https://github.com/Manishak798/piepay-backend-assignment.git
 npm install
 ```
 
