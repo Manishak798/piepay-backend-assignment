@@ -21,7 +21,6 @@ This project is a backend service that detects and stores Flipkart payment offer
 
 ```bash
 git clone https://github.com/your-username/piepay-backend.git
-cd piepay-backend
 npm install
 ```
 
@@ -36,7 +35,7 @@ MONGO_URI=mongodb://localhost:27017/piepay
 ### Run the Server
 ```bash
 # for production
-npm start
+npm run dev
 ```
 
 ## 2. ✅ Assumptions Made
@@ -50,16 +49,18 @@ npm start
 - Flipkart's original API is not accessible, so a realistic mock JSON was used for testing and demonstration.
 
 ## 3. 🧠 Design Choices
-- Frameworks & Tools
-  
-Express.js: Lightweight, fast, and ideal for RESTful API development.
+🧰 Frameworks & Tools
+- **TypeScript:** Enables static typing, improved developer experience, and early error detection. Enforces robust, maintainable code throughout the backend.
 
-MongoDB with Mongoose: Flexible schema, fast inserts, and perfect for evolving offer structures.
+- **Express.js:** Minimal and performant Node.js framework used to build scalable, RESTful APIs with middleware flexibility and routing control.
 
-- Folder Structure
-Followed MVC pattern for clean separation of concerns: routes, controllers, models.
+- **MongoDB + Mongoose:** NoSQL database with Mongoose ODM for schema definition, validation, and fast, dynamic document handling—ideal for evolving offer data models.
 
-- Database Schema
+🗂️ Project Structure
+
+- **Modular MVC with TypeScript**: Organized codebase following the MVC pattern with strict TypeScript typing for routes, controllers, models, and reusable interfaces. This structure ensures clarity, reusability, and ease of scaling.
+
+🛢️ Database Schema
 ```
 Each Offer stores:
 
